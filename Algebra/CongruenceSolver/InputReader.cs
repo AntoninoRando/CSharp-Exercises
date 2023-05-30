@@ -10,7 +10,7 @@ public static class InputReader
     {
         return $"\x1B[{color}m{text}\x1B[0m";
     }
-    public static string ReadInput(List<string> congruences, List<string> systems)
+    public static string ReadInput(List<string> congruences, List<string> systems, List<int> order)
     {
         string input = string.Empty;
         string systemInput = string.Empty;
@@ -46,6 +46,7 @@ public static class InputReader
             {
                 systemInput += line;
                 countSyst++;
+                order.Add(2);
             }
             else if (countSyst > 0) // User typed the last of congruence of a system
             {
@@ -53,11 +54,14 @@ public static class InputReader
                 systems.Add(systemInput);
                 systemInput = string.Empty;
                 countSyst = 0;
+                countCongr++;
+                order.Add(0);
             }
             else // User typed a congrunce.
             {
                 congruences.Add(line);
                 countCongr++;
+                order.Add(1);
             }
 
             input += line + '\n';
