@@ -1,4 +1,4 @@
-# CSharp-Exercises
+# C#-Exercises
 A collection of code written in C# just for the sake of learning.
 
 You can find the following programs:
