@@ -141,7 +141,7 @@ public class InputReader
 
             }
 
-            int? sol = linear_resolution(lOperands[0], rOperands[0], mod);
+            int? sol = solveLinear(lOperands[0], rOperands[0], mod);
 
             if (sol != null)
             {

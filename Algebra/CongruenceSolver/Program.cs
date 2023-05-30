@@ -1,7 +1,8 @@
 ﻿using static CongruenceSolver.InputReader;
+using static CongruenceSolver.Solver;
 using System.Text.RegularExpressions;
 
-Console.Clear();
+//Console.Clear();
 
 Console.Write("Write the congruence(s) or ");
 string help = col("--help", "32");
@@ -9,12 +10,15 @@ Console.Write($"{help} for documentation.");
 string escape = col("ENTER two times in a row", "32");
 Console.WriteLine($"Press {escape} to exit.");
 
-string input = take_congruences();
+int mod = 0;
+int? sol = SystemSolve(new int[9] {1025, 5312065, 8, 36, 322, 5, 4, 7, 3}, ref mod);
+Console.WriteLine($"The solution is {sol} module {mod}");
+// string input = take_congruences();
 
-if (parse(input) == 1) // Error occurred.
-{
-    printHelp();
-}
+// if (parse(input) == 1) // Error occurred.
+// {
+//     printHelp();
+// }
 
 /* FUNCTIONS */
 
