@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Console")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("CongruenceSolver")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Console")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Console")]
+[assembly: System.Reflection.AssemblyProductAttribute("CongruenceSolver")]
+[assembly: System.Reflection.AssemblyTitleAttribute("CongruenceSolver")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generato dalla classe WriteCodeFragment di MSBuild.

@@ -1,0 +1,15 @@
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.csproj.AssemblyReference.cache
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.AssemblyInfoInputs.cache
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.AssemblyInfo.cs
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.csproj.CoreCompileInputs.cache
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\bin\Debug\net7.0\CongruenceSolver.exe
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\bin\Debug\net7.0\CongruenceSolver.deps.json
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\bin\Debug\net7.0\CongruenceSolver.runtimeconfig.json
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\bin\Debug\net7.0\CongruenceSolver.dll
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\bin\Debug\net7.0\CongruenceSolver.pdb
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.dll
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\refint\CongruenceSolver.dll
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.pdb
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\CongruenceSolver.genruntimeconfig.cache
+C:\Users\stefa\Desktop\C#Exercises\Algebra\CongruenceSolver\obj\Debug\net7.0\ref\CongruenceSolver.dll

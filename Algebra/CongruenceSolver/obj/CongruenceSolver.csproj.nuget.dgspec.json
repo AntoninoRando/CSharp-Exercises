@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\Console\\Console.csproj": {}
+    "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\CongruenceSolver\\CongruenceSolver.csproj": {}
   },
   "projects": {
-    "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\Console\\Console.csproj": {
+    "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\CongruenceSolver\\CongruenceSolver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\Console\\Console.csproj",
-        "projectName": "Console",
-        "projectPath": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\Console\\Console.csproj",
+        "projectUniqueName": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\CongruenceSolver\\CongruenceSolver.csproj",
+        "projectName": "CongruenceSolver",
+        "projectPath": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\CongruenceSolver\\CongruenceSolver.csproj",
         "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\Console\\obj\\",
+        "outputPath": "C:\\Users\\stefa\\Desktop\\C#Exercises\\Algebra\\CongruenceSolver\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config"
