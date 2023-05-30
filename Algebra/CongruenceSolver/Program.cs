@@ -2,70 +2,65 @@
 using static CongruenceSolver.Solver;
 using System.Text.RegularExpressions;
 
-//Console.Clear();
+Console.Clear();
 
-Console.Write("Write the congruence(s) or ");
 string help = col("--help", "32");
-Console.Write($"{help} for documentation.");
 string escape = col("ENTER two times in a row", "32");
-Console.WriteLine($"Press {escape} to exit.");
+string prompt = $"Write the congruence(s) or {help} for documentation. Press {escape} to exit.";
+Console.WriteLine(prompt);
 
-int mod = 0;
-int? sol = SystemSolve(new int[9] {1025, 5312065, 8, 36, 322, 5, 4, 7, 3}, ref mod);
-Console.WriteLine($"The solution is {sol} module {mod}");
-// string input = take_congruences();
+List<string> congruences = new List<string>();
+List<string> systems = new List<string>();
+string input = ReadInput(congruences, systems);
 
-// if (parse(input) == 1) // Error occurred.
-// {
-//     printHelp();
-// }
-
-/* FUNCTIONS */
-
-string take_congruences()
+if (input == "--help")
 {
-    string input = string.Empty;
-    int congruences = 0, systems = 0;
+    PrintHelp();
+}
+else
+{
+    List<string> solutions = new List<string>();
 
-    Console.WriteLine("\x1B[36m"); // Set cyan color for user input.
-    while (true)
+    for (int i = 0; i < congruences.Count; i++)
     {
+        string error = string.Empty;
 
-        if (systems < 1)
+        List<int> congVec = ParseCongruence(congruences[i], ref error);
+        if (!String.IsNullOrEmpty(error))
         {
-            Console.Write($"\x1B[0m({congruences + 1})");
-        }
-        Console.Write("\t\x1B[36m");
-
-        string? line = Console.ReadLine();
-
-        if (String.IsNullOrEmpty(line) || String.IsNullOrWhiteSpace(line))
-        {
-            Console.Write(col("EXIT\n", "0"));
-            break;
-        }
-
-        if (line == "--help")
-        {
-            Console.Write("\x1B[0m\n");
-            return "--help";
-        }
-
-        if (line[^1] == ';')
-        {
-            systems++;
+            error = col($"error", "41") + col(": " + error + ".", "31");
+            solutions.Add(error);
         }
         else
         {
-            congruences -= systems; // Keep advancing the counter without considering all the equations now typed.
-            systems = 0;
+            int? sol = SolveLinear(congVec[0], congVec[1], congVec[2]);
+
+            if (sol != null)
+            {
+                solutions.Add($"\x1B[0mOne solution is \x1B[32;1m{sol}\x1B[0m.");
+            }
+            else
+            {
+                solutions.Add($"\x1B[0mThe are \x1B[32;1mNO solutions\x1B[0m.");
+            }
         }
-
-        input += line + '\n';
-        congruences++;
-
     }
-    Console.Write("\x1B[0m\n"); // Reset color and put a new line.
 
-    return input;
+    // Write slutions alongside equations.  
+    Console.Clear();
+    Console.WriteLine(prompt);
+    string[] lines = input.Split('\n');
+
+    int maxLen = lines.Max(s => s.Length);
+
+    int k;
+    for (k = 0; k < solutions.Count; k++)
+    {
+        int toFill = maxLen - lines[k].Length;
+        Console.WriteLine(lines[k] + $"{new String(' ', toFill)}\t\t" + solutions[k]);
+    }
+    for (int j = k; j < lines.Length; j++)
+    {
+        Console.WriteLine(lines[j]);
+    }
 }

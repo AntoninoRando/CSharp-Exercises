@@ -1,5 +1,5 @@
 # CSharp-Exercises
-A collection of code written in C# just for fun and exercise.
+A collection of code written in C# just for the sake of learning.
 
 You can find the following programs:
 

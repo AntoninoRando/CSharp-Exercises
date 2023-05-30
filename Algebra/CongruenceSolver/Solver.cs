@@ -1,8 +1,8 @@
 ﻿namespace CongruenceSolver;
 
-public class Solver
+public static class Solver
 {
-    public static int? solveLinear(int ax, int b, int n, int? gcd = null, bool printProcess = false)
+    public static int? SolveLinear(int ax, int b, int n, int? gcd = null, bool printProcess = false)
     {
         if (gcd == null)
         {
@@ -29,7 +29,7 @@ public class Solver
     public static bool MakeTheoSuitable(ref int ax, ref int b, ref int n)
     {
         int gcd = GCD(ax, n);
-        int? sol = solveLinear(ax, b, n, gcd);
+        int? sol = SolveLinear(ax, b, n, gcd);
 
         if (sol == null)
         {
@@ -93,7 +93,9 @@ public class Solver
             int RiXi = Ri[i];
             int Bi = m[1 + (3*(i-1))];
             int ni = m[2 + (3*(i-1))];
-            Xi.Add(Ri[i] * (int) solveLinear(RiXi, Bi, ni)); // Final solution is X = R1X1 + R2X2 + ... + RnXn 
+
+            #pragma warning disable CS8629 // Suppres the warning since we know that SolveLinear is not null
+            Xi.Add(Ri[i] * (int)SolveLinear(RiXi, Bi, ni)); // Final solution is X = R1X1 + R2X2 + ... + RnXn 
         }
 
         return Xi.Sum() % mod;
