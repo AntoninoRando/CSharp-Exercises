@@ -4,7 +4,7 @@ using static CongruenceSolver.Solver;
 
 public static class InputReader
 {
-    private static string operators = "+-";
+    // private static string operators = "+-";
 
     public static string col(string text, string color)
     {
@@ -80,8 +80,14 @@ public static class InputReader
         Console.WriteLine("-\tSeparate each congruence by a semicolon ;.");
     }
 
-    public static int ReadModule(string congruence, ref int modIndex)
+    private static int ReadModule(string congruence, ref int modIndex)
     {
+        if (!congruence.Contains("mod"))
+        {
+            return 0;
+        }
+
+
         int mod = 0;
 
         for (int j = 1; j <= congruence.Length; j++)
@@ -96,6 +102,35 @@ public static class InputReader
         }
 
         return mod;
+    }
+
+    private static int ReadOperand(string operand, ref bool unknown)
+    {
+        if (operand.Length == 1 && !Char.IsDigit(operand[0]))
+        {
+            unknown = true;
+            return 1;
+        }
+
+        int unk = 1;
+        int num = 0;
+
+        for (int i = 1; i <= operand.Length; i++)
+        {
+            char chr = operand[^i];
+            
+            if (!Char.IsDigit(chr))
+            {
+                unk++;
+                continue;
+            }
+
+            num += (chr - '0') * (int)Math.Pow(10, i - unk);
+
+        }
+
+        unknown = unk == 2 ? true : false;
+        return num;
     }
 
     public static List<int> ParseCongruence(string congruence, ref string error)
@@ -119,6 +154,7 @@ public static class InputReader
         cong = cong[^cong.Length..^(j + 1)];
 
         string[] operands = cong.Split('=');
+
         if (operands.Length > 2)
         {
             error = "Too many equals";
@@ -130,70 +166,29 @@ public static class InputReader
             return congVector;
         }
 
-        List<int> lOperands = new List<int>();
-        j = 0;
-        int digit = 0;
-        foreach (char c in operands[0])
+        bool unknown = false;
+        int unkCount = 0;
+        int ax = ReadOperand(operands[0], ref unknown);
+        unkCount += unknown? 1 : 0;
+        int b = ReadOperand(operands[1], ref unknown);
+        unkCount += unknown? 1 : 0;
+
+        if (unkCount == 0)
         {
-            if (lOperands.Count < j + 3)
-            {
-                lOperands.Add(0);
-                lOperands.Add('\0');
-                lOperands.Add('\0');
-            }
-
-            // This operand ended.
-            if (operators.Contains(c))
-            {
-                lOperands[j + 1] = c;
-                j++;
-                digit = 0;
-                // Revert number lOperands[j]
-            }
-            else if (Char.IsDigit(c))
-            {
-                lOperands[j] += (c - '0') * (int)Math.Pow(10, digit);
-                digit++;
-            }
-            else
-            {
-                lOperands[j + 2] = c;
-            }
-
-        }
-        List<int> rOperands = new List<int>();
-        j = 0;
-        digit = 0;
-        foreach (char c in operands[1])
-        {
-            if (rOperands.Count < j + 3)
-            {
-                rOperands.Add(0);
-                rOperands.Add('\0');
-                rOperands.Add('\0');
-            }
-
-            // This operand ended.
-            if (operators.Contains(c))
-            {
-                rOperands[j + 1] = c;
-                j++;
-                digit = 0;
-                // Revert number rOperands[j]
-            }
-            else if (Char.IsDigit(c))
-            {
-                rOperands[j] += (c - '0') * (int)Math.Pow(10, digit);
-                digit++;
-            }
-            else
-            {
-                rOperands[j + 2] = c;
-            }
+            error = "Unknown is missing";
+            return congVector;
         }
 
-        congVector.Add(lOperands[0]);
-        congVector.Add(rOperands[0]);
+        if (unknown)
+        {
+            // Swap ax with b if b is unknown
+            ax += b;     // ax -> ax+b
+            b = ax - b;  // b -> ax-b = (ax+b)-b = ax
+            ax -= b;     // ax -> ax-b = (ax+b)-(a)= b
+        }
+
+        congVector.Add(ax);
+        congVector.Add(b);
         congVector.Add(mod);
 
         return congVector;
