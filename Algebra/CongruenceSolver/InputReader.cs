@@ -49,6 +49,7 @@ public static class InputReader
             }
             else if (countSyst > 0) // User typed the last of congruence of a system
             {
+                systemInput += line;
                 systems.Add(systemInput);
                 systemInput = string.Empty;
                 countSyst = 0;
@@ -82,26 +83,32 @@ public static class InputReader
 
     private static int ReadModule(string congruence, ref int modIndex)
     {
-        if (!congruence.Contains("mod"))
-        {
-            return 0;
-        }
-
-
+        bool modFound = false;
         int mod = 0;
-
         for (int j = 1; j <= congruence.Length; j++)
         {
             if (!Char.IsDigit(congruence[^j]))
             {
-                modIndex = j;
-                break;
+                try
+                {
+                    if (congruence[^j] == 'd' && congruence[^(j+1)] == 'o' && congruence[^(j+2)] == 'm')
+                    {
+                        modIndex = congruence.Length - (j+2); // j encountered d, +2 (m <- o <- d) encountered m 
+                        modFound = true;
+                        break;
+                    }
+                    return 0;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    return 0;
+                }
             }
 
             mod += (congruence[^j] - '0') * (int)Math.Pow(10, j - 1);
         }
 
-        return mod;
+        return modFound ? mod : 0;
     }
 
     private static int ReadOperand(string operand, ref bool unknown)
@@ -151,7 +158,7 @@ public static class InputReader
         }
 
         // Remove mod from the congruence
-        cong = cong[^cong.Length..^(j + 1)];
+        cong = cong.Remove(j);
 
         string[] operands = cong.Split('=');
 
@@ -168,10 +175,22 @@ public static class InputReader
 
         bool unknown = false;
         int unkCount = 0;
+
         int ax = ReadOperand(operands[0], ref unknown);
         unkCount += unknown? 1 : 0;
+        if (ax == 0)
+        {
+            error = "Invalid left operand";
+            return congVector;
+        }
+
         int b = ReadOperand(operands[1], ref unknown);
         unkCount += unknown? 1 : 0;
+        if (b == 0)
+        {
+            error = "Invalid right operand";
+            return congVector;
+        }
 
         if (unkCount == 0)
         {

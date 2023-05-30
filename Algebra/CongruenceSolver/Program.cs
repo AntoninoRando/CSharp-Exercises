@@ -28,7 +28,7 @@ else
         List<int> congVec = ParseCongruence(congruences[i], ref error);
         if (!String.IsNullOrEmpty(error))
         {
-            error = col($"error", "41") + col(": " + error + ".", "31");
+            error = col("error", "41") + col(": " + error + ".", "31");
             solutions.Add(error);
         }
         else
@@ -44,6 +44,53 @@ else
                 solutions.Add($"\x1B[0mThe are \x1B[32;1mNO solutions\x1B[0m.");
             }
         }
+    }
+
+    // Iterate through systems
+    for (int i = 0; i < systems.Count; i++)
+    {
+        string error = string.Empty;
+        string system = systems[i];
+
+        string[] systemCongs = system.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        List<int> systemVec = new List<int>();
+        // Iterate through systems' congruences.
+        for (int j = 0; j < systemCongs.Length; j++)
+        {
+            string cong = systemCongs[j];
+            if (cong[^1] == ';')
+            {
+                cong = cong.Remove(cong.Length-1);
+            }
+            List<int> congVec = ParseCongruence(cong, ref error);
+
+            if (!String.IsNullOrEmpty(error))
+            {
+                error = col($"error in {j}° congruence", "41") + col(": " + error + ".", "31");
+                solutions.Add(error);
+                break;
+            }
+
+            systemVec.AddRange(congVec);
+        }
+
+        if (!String.IsNullOrEmpty(error))
+        {
+            continue;
+        }
+
+        int mod = 0;
+        int? sol = SystemSolve(systemVec.ToArray(), ref mod);
+
+        if (sol != null)
+        {
+            solutions.Add($"\x1B[32;1m{sol}\x1B[0m is the unique solution module {mod}.");
+        }
+        else
+        {
+            solutions.Add($"\x1B[0mThe are \x1B[32;1mNO solutions\x1B[0m.");
+        }
+
     }
 
     // Write slutions alongside equations.  
